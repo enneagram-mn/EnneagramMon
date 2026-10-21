@@ -10,13 +10,13 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
 <title>Систем-векторын тест</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Noto+Sans:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: sticky app bar with view tabs; one view at a time in a 720px column; quiz as a single card; vectors carry their own colors */
 :root{
   --bg:#EEF1F4;--surface:#FFFFFF;--ink:#18212E;--muted:#5B6676;--line:#D5DCE4;--accent:#2A6A8C;--accent-soft:#DCE9F1;--gold:#C98A1E;--night:#141C29;--night-ink:#E9EEF5;
   --c-sk:#2E9C94;--c-an:#8A6648;--c-ur:#D24E32;--c-mu:#62813A;--c-vi:#D49420;--c-so:#4A5BD0;--c-or:#C93F86;--c-ol:#6E5D9E;
-  --display:"Unbounded","Arial Black",system-ui,sans-serif;--body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --display:"Montserrat","Noto Sans","Segoe UI",Roboto,Arial,sans-serif;--body:"Noto Sans","Segoe UI",Roboto,Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0F151E;--surface:#18212E;--ink:#E7ECF2;--muted:#9AA6B6;--line:#2A3646;--accent:#6FB3D6;--accent-soft:#1E3344;--gold:#E7AE4A;--night:#0A0F17;--night-ink:#E9EEF5;
@@ -26,15 +26,15 @@
   --c-sk:#4CC4BA;--c-an:#C29A78;--c-ur:#F07A5E;--c-mu:#93B864;--c-vi:#F0B848;--c-so:#8291F2;--c-or:#EE77B2;--c-ol:#A796D6;color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.65;margin:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--surface)}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.2;margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.25;margin:0;letter-spacing:-.005em}
 h1{font-size:clamp(1.6rem,6.5vw,2.4rem);font-weight:700}
 h2{font-size:1.2rem;font-weight:700}
-h3{font-size:.98rem;font-weight:500}
+h3{font-size:1rem;font-weight:600}
 p{margin:0}
 a{color:var(--accent)}
-.eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600}
+.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
 .msg{font-size:.88rem;color:var(--muted)}
 button{font-family:var(--body);font-size:1rem;font-weight:600;border-radius:12px;padding:12px 18px;cursor:pointer;border:1px solid var(--accent);background:transparent;color:var(--accent)}
 button.primary{background:var(--accent);color:var(--bg)}
@@ -83,7 +83,7 @@ main{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-lef
 .segs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
 .segs i{height:5px;border-radius:3px;background:var(--line);overflow:hidden;position:relative}
 .segs i b{position:absolute;inset:0 auto 0 0;background:var(--accent);transition:width .25s}
-.qtext{font-family:var(--display);font-size:clamp(1.05rem,4.6vw,1.3rem);font-weight:500;line-height:1.35;min-height:3.6em}
+.qtext{font-family:var(--body);font-size:clamp(1.12rem,4.8vw,1.35rem);font-weight:600;line-height:1.45;min-height:3.6em}
 .cheer{font-size:.88rem;color:var(--gold);font-weight:600;min-height:1.3em}
 .opts{display:flex;flex-direction:column;gap:8px}
 .opt{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:12px 14px;border-radius:12px;font-weight:500}
@@ -291,7 +291,7 @@ sk:{nm:"Арьсны",low:true,tg:"Хурдан, практик, үр ашигт
  talk:"Товч, тодорхой: \"Хэд вэ?\", \"Хурдан\", \"Ашигтай юу?\"",
  act:"Хуваарь, жагсаалттай; хямдрал хайдаг; спорт, хоолны дэглэм барьдаг.",
  tip:"Товч ярь, ашиг тусыг нь хэл, цагийг нь хүндэл."},
-an:{nm:"Анусын",low:true,tg:"Нямбай, үнэнч, гүнзгий",
+an:{nm:"Анал",low:true,tg:"Нямбай, үнэнч, гүнзгий",
  want:"Хүндлэл, талархал; ажлыг төгс, бүрэн дуусгах; гэр бүл ба уламжлал",
  good:["Чанар, нарийвчлалд гарамгай","Үнэнч найз, найдвартай хамтрагч","Мэдлэгээ хуримтлуулж, бусдад заадаг"],
  stress:["Гомдлоо удаан тээх","Зөрүүд, өөрчлөлтийг эсэргүүцэх","Шийдвэр гаргахдаа гацах"],
@@ -302,7 +302,7 @@ an:{nm:"Анусын",low:true,tg:"Нямбай, үнэнч, гүнзгий",
  talk:"Удаан, нарийвчилсан, эхнээс нь ярина: \"Урьд нь...\", \"Зөв нь бол...\"",
  act:"Хуучин найзуудаа хадгална; цэвэрч; эхлүүлснээ дуусгана.",
  tip:"Яаруулахгүй, ярьж дуусгуул, хийснийг нь үнэл."},
-ur:{nm:"Шээсний сүвний",low:true,tg:"Удирдагч, өгөөмөр, хязгааргүй",
+ur:{nm:"Уретрал",low:true,tg:"Удирдагч, өгөөмөр, хязгааргүй",
  want:"Сүргээ хамгаалж, урагш хөтлөх; эрх чөлөө ба шинэ хил хязгаар",
  good:["Хямралд удирдах, хариуцлага хүлээх","Өгөөмөр, бусдын төлөө зориулах","Эрсдэл хүлээж, шинэ зүйл нээх"],
  stress:["Дүрэм, хязгаарыг үл тоох","Халуун зан, тэвчээргүй байдал","Эрх мэдэлд нь халдвал хэрцгий хариу"],
@@ -335,7 +335,7 @@ vi:{nm:"Харааны",low:false,tg:"Сэтгэл хөдлөлтэй, өрөв�
  talk:"Сэтгэл хөдлөлтэй: \"Хөөрхөн!\", \"Гайхалтай!\", \"Чи зүгээр үү?\"",
  act:"Амархан уйлна, инээнэ; амьтан, хүмүүст хайртай; кино, урлагт дуртай.",
  tip:"Сэтгэл хөдлөлийг нь хүлээн ав, дулаан бай."},
-so:{nm:"Сонсголын",low:false,tg:"Дотогшоо, гүн бодолтой, утга хайгч",
+so:{nm:"Дууны",low:false,tg:"Дотогшоо, гүн бодолтой, утга хайгч",
  want:"Амьдралын утга учир, өөрийгөө ба ертөнцийг ойлгох",
  good:["Гүн, хийсвэр сэтгэлгээ","Төвлөрөх чадвар","Хөгжим, үг, санаанд мэдрэмжтэй"],
  stress:["Бусдаас тусгаарлагдах","Хоосон, утгагүй мэт мэдрэмж","Нойрны хэмнэл алдагдах"],
@@ -458,8 +458,8 @@ or:{need:"сонсогдох, анхаарал",give:"хөгжилтэй уур 
 ol:{need:"үнэнч байдал, итгэл",give:"аюулыг эрт мэдрэх, стратеги",trig:"худал, нуугдмал санаа",money:"стратегитай нөөц бүрдүүлдэг",fut:"Эрсдэлийн нөөц төлөвлөгөө хамтдаа гарга."}
 };
 const PAIRV={
-"an-sk":"Хурд ба нямбай байдал зөрнө. Арьсны вектортой нь хурдан, анусын вектортой нь бүрэн гүйцэд хийхийг хүсдэг. Гэрийн ажлын хуваарьт \"дуусгах цаг\" тусга.",
-"sk-ur":"Мөнгө дээр мөргөлдөж болно: арьсны вектор хэмнэдэг, шээсний сүвний вектор өгөөмөр. Хамтын төсөв болон хүн бүрийн \"чөлөөт мөнгө\"-ийг тусад нь тохир.",
+"an-sk":"Хурд ба нямбай байдал зөрнө. Арьсны вектортой нь хурдан, анал вектортой нь бүрэн гүйцэд хийхийг хүсдэг. Гэрийн ажлын хуваарьт \"дуусгах цаг\" тусга.",
+"sk-ur":"Мөнгө дээр мөргөлдөж болно: арьсны вектор хэмнэдэг, уретрал вектор өгөөмөр. Хамтын төсөв болон хүн бүрийн \"чөлөөт мөнгө\"-ийг тусад нь тохир.",
 "so-vi":"Нэг нь сэтгэлээ үгээр илэрхийлэхийг хүсэх үед нөгөө нь чимээгүй бодно. Долоо хоногт тогтсон цагт гүн яриа хийж заншаарай.",
 "or-so":"Нэг нь ярих, нөгөө нь нам гүм хэрэгтэй. Гэртээ \"чимээгүй цаг\" ба \"ярих цаг\"-ийг тохир.",
 "an-ur":"Тогтвортой байдал ба шинэ рүү тэмүүлэл. Том шийдвэрийг заавал хамтдаа ярилцаж гаргана.",
