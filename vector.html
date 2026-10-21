@@ -628,7 +628,7 @@ function renderShop(){
   $("idbox").hidden=!st.id;$("rid").textContent=st.id||"—";
   if(sel&&!ownsP(sel)){
     const p=PRODUCTS.find(x=>x.c===sel),up=paid>0,note=`${sel}${up?"+":""} ${st.id||"(эхлээд тест бөглөнө үү)"}`;
-    const extra=sel==="VK"?"Хүүхдийн хэсэгт асуулгыг бөглөж, гарсан 12 тэмдэгттэй дугаарыг Messenger-ээр хамт илгээнэ.":sel==="VG"?"Хамтрагчийнхаа 19 тэмдэгттэй дугаарыг Messenger-ээр хамт илгээнэ.":"";
+    const extra=sel==="VK"?"Багц нээгдсэний дараа \"Хүүхэд\" хэсэгт хүүхэд бүрийнхээ асуулгыг бөглөхөд тайлан шууд гарна.":sel==="VG"?"Багц нээгдсэний дараа \"Гэр бүл\" хэсэгт хамтрагчийнхаа дугаарыг оруулахад тайлан шууд гарна.":"";
     $("selbox").innerHTML=`<span class="eyebrow">Таны сонголт</span><h3>${p.nm}</h3><div class="amt">Төлөх дүн: <b>${fmtN(diffFor(sel))}₮</b></div>
       <div class="idrow">Гүйлгээний утга: <code id="note">${note}</code><button type="button" id="copyNote">Хуулах</button></div>${extra?`<p class="msg">${extra}</p>`:""}`;
     $("selbox").hidden=false;
@@ -644,7 +644,7 @@ function renderKid(arr,kid){
   const pr=profile(arr,KIDQ);
   let h=`<div class="rhead" style="margin-bottom:10px"><svg class="radar" id="kRadar" viewBox="-38 -14 276 228"></svg><div class="txt"><span class="eyebrow">Хүүхдийн дугаар · ${kid}</span><h2>${pr.strong.map(v=>V[v].nm).join(" · ")}</h2>${chips(pr.strong)}
     <button type="button" onclick="kidQ.reset();document.getElementById('kout').innerHTML=''" style="align-self:flex-start">Дахин бөглөх</button></div></div>`;
-  if(st.kid!==kid){h+=st.id?lockBox("VK","Хүүхдийн вектор бүрт тохирсон хүмүүжлийн арга, урамшуулах ба хориглох зүйлс, тохирох дугуйлан. Энэ дугаарыг өөрийн дугаартай хамт илгээнэ."):`<p class="msg">Хүүхдийн тайлан авахын тулд эхлээд өөрөө тестээ бөглөнө үү.</p>`;$("kout").innerHTML=h;radar($("kRadar"),pr.P);return;}
+  if(!st.kid){h+=st.id?lockBox("VK","Хүүхдийн вектор бүрт тохирсон хүмүүжлийн арга, урамшуулах ба хориглох зүйлс, тохирох дугуйлан. Энэ дугаарыг өөрийн дугаартай хамт илгээнэ."):`<p class="msg">Хүүхдийн тайлан авахын тулд эхлээд өөрөө тестээ бөглөнө үү.</p>`;$("kout").innerHTML=h;radar($("kRadar"),pr.P);return;}
   h+=`<div style="display:flex;flex-direction:column;gap:10px">`;
   pr.strong.forEach((v,i)=>{const k=KID[v];h+=acc(`${V[v].nm} вектор`,V[v].tg,`<span class="lbl">Хийх нь зөв</span><ul>${li(k.do)}</ul><span class="lbl">Зайлсхийх</span><ul>${li(k.no)}</ul><p><b>Тохирох дугуйлан:</b> ${k.act}</p><p><b>Юуг нь магтах вэ:</b> ${k.praise}</p>`,{open:i===0,color:col(v)});});
   const me=st.id?profile(decMain(st.id),Q):null;
@@ -659,7 +659,7 @@ function renderFam(pid){
   $("fmsg").textContent="";const pp=profile(parr,Q);
   let h=`<div class="card"><span class="eyebrow">Хамтрагчийн векторууд</span>${chips(pp.strong)}</div>`;
   if(!st.id){$("fout").innerHTML=h+`<p class="msg">Харьцуулахын тулд эхлээд өөрөө тестээ бөглөнө үү.</p>`;return;}
-  if(st.fam!==pid){$("fout").innerHTML=h+lockBox("VG","Хоёр хүний векторын нийцэл, зөрчил үүсэх нөхцөл ба шийдэл, мөнгө, гэр, ирээдүйн хамтын төлөвлөгөө.");return;}
+  if(!st.fam){$("fout").innerHTML=h+lockBox("VG","Хоёр хүний векторын нийцэл, зөрчил үүсэх нөхцөл ба шийдэл, мөнгө, гэр, ирээдүйн хамтын төлөвлөгөө.");return;}
   const me=profile(decMain(st.id),Q),notes=[],common=me.strong.filter(v=>pp.strong.includes(v));
   me.strong.forEach(a=>pp.strong.forEach(b=>{const k=pairKey(a,b);if(PAIRV[k]&&!notes.some(n=>n[0]===k))notes.push([k,PAIRV[k]]);}));
   h+=`<div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">`;
@@ -688,20 +688,20 @@ function renderGates(){
   $("guess").classList.toggle("locked",st.lv<2);
   $("vlist").innerHTML=ORDER.map(v=>{const x=V[v];return acc(`${x.nm} вектор`,`${x.tg} · ${x.low?"доод":"дээд"} дөрвөл`,st.lv>=3?`<p><b>Гол хүсэл:</b> ${x.want}</p><p><b>Гадаад төрх:</b> ${x.look}</p><p><b>Яриа:</b> ${x.talk}</p><p><b>Зан үйл:</b> ${x.act}</p><p><b>Хүүхэд насанд:</b> ${x.kid}</p><p><b>Тохирох ажил:</b> ${x.job}</p><p><b>Түүнтэй харилцахдаа:</b> ${x.tip}</p><p><b>Харилцаанд хэрэгтэй нь:</b> ${FAM[v].need}. <b>Уурлуулах зүйл:</b> ${FAM[v].trig}.</p>`:lockBox("V3","Гадаад төрх, яриа, зан үйл, хүүхэд насны шинж, тохирох ажил, харилцах арга."),{color:col(v),locked:st.lv<3})}).join("");
 }
-function renderAll(){markTabs();renderReport();renderShop();renderGates();if(st.fam){$("pid").value=st.fam;renderFam(st.fam);}if(st.kid){const a=decKid(st.kid);if(a)renderKid(a,st.kid);}}
+function renderAll(){markTabs();renderReport();renderShop();renderGates();if(st.fam&&st.fam!=="*"&&!$("pid").value){$("pid").value=st.fam;}if(st.fam&&$("pid").value)renderFam(norm($("pid").value));if(st.kid){const ka=loadJ(KKEY,[]);if(ka.filter(Boolean).length===24)renderKid(ka,enc(ka,12));}}
 
 /* ---------- unlock ---------- */
 async function tryUnlock(t,quiet){
   const m=$("umsg"),s=(t||"").match(/\b(v1|v2|v3|vk|vg)\.([0-9A-Za-z]{19})(?:\.([0-9A-Za-z]{12,19}))?\.([A-Za-z0-9_-]{86})/i);
   if(!s){if(!quiet)m.textContent="Холбоос танигдсангүй. Бүтнээр нь хуулж буулгана уу.";return false;}
   const kind=s[1].toLowerCase(),id=norm(s[2]),second=s[3]?norm(s[3]):"",sig=s[4];
-  const msg=kind==="vk"?`vecK:${id}:${second}`:kind==="vg"?`vecG:${id}:${second}`:`vec${kind[1]}:${id}`;
-  const ok=decMain(id)&&(kind==="vk"?decKid(second):kind==="vg"?decMain(second):true)&&await verify(msg,sig);
+  const msg=kind==="vk"?(second?`vecK:${id}:${second}`:`vecK:${id}`):kind==="vg"?(second?`vecG:${id}:${second}`:`vecG:${id}`):`vec${kind[1]}:${id}`;
+  const ok=decMain(id)&&(!second||(kind==="vk"?decKid(second):decMain(second)))&&await verify(msg,sig);
   if(!ok){if(!quiet)m.textContent="Энэ код хүчингүй байна. Бидэнтэй Facebook хуудсаар холбогдоно уу.";return false;}
   if(st.id&&st.id!==id)st={lv:0,id:"",kid:"",fam:"",tok:{}};
   st.id=id;const tok=s[0];
-  if(kind==="vk"){st.kid=second;st.tok.kid=tok;st.lv=Math.max(st.lv,3);}
-  else if(kind==="vg"){st.fam=second;st.tok.fam=tok;st.lv=Math.max(st.lv,3);}
+  if(kind==="vk"){st.kid=second||"*";st.tok.kid=tok;st.lv=Math.max(st.lv,3);}
+  else if(kind==="vg"){st.fam=second||"*";st.tok.fam=tok;st.lv=Math.max(st.lv,3);}
   else{const lv=+kind[1];if(lv>=st.lv){st.lv=lv;st.tok.main=tok;}}
   if(!st.tok.main)st.tok.main="a."+id;
   saveJ(TKEY,st.tok);sel="";renderAll();m.textContent="Нээгдлээ.";
